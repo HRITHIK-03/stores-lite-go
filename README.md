@@ -28,16 +28,27 @@ It demonstrates **clean architecture, containerized deployment, and cloud-ready 
 
 .
 ├── cmd/api/main.go # Application entrypoint
+
 ├── internal/
+
 │ ├── config/ # Environment configuration
+
 │ ├── db/migrations/ # Database migrations
+
 │ ├── domain/ # Core models
+
 │ ├── repo/ # Postgres & Redis implementations
+
 │ ├── service/ # Business logic
+
 │ └── transport/ # REST & GraphQL handlers, middleware
+
 ├── Dockerfile
+
 ├── docker-compose.yml
+
 ├── k8s/ # Kubernetes manifests
+
 └── README.md
 
 
