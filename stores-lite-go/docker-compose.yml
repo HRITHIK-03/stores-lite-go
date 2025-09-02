@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stores
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/stores?sslmode=disable
+      REDIS_URL: redis://redis:6379/0
+      APP_ENV: dev
+    ports: ["8080:8080"]
+    depends_on: [db, redis]
+volumes:
+  pgdata:

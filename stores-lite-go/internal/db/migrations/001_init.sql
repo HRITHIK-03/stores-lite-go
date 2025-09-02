@@ -1,0 +1,14 @@
+-- Products & Orders
+CREATE TABLE IF NOT EXISTS products (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  price_cents BIGINT NOT NULL,
+  stock BIGINT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY,
+  product_id BIGINT NOT NULL REFERENCES products(id),
+  qty BIGINT NOT NULL,
+  amount BIGINT NOT NULL
+);

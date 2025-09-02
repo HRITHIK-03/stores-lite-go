@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stores-lite
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: stores-lite }
+  template:
+    metadata: { labels: { app: stores-lite } }
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/hrithik-03/stores-lite:latest
+          ports: [{ containerPort: 8080 }]
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@postgres:5432/stores?sslmode=disable
+            - name: REDIS_URL
+              value: redis://redis:6379/0
+            - name: APP_ENV
+              value: prod
